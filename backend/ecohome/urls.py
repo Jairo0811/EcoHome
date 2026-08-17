@@ -8,5 +8,6 @@ urlpatterns = [
     path("api/v1/", include("apps.homes.urls")),
     path("api/v1/", include("apps.devices.urls")),
     path("api/v1/iot/", include("apps.iot.urls")),
+    path("api/v1/resources/", include("apps.resources.urls")),
     path("api/v1/dashboard/", include("apps.dashboard.urls")),
 ]

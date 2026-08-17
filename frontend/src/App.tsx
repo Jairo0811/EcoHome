@@ -1,5 +1,6 @@
 import { DeviceStatus } from './components/DeviceStatus';
 import { LoginScreen } from './components/LoginScreen';
+import { ResourceOverview } from './components/ResourceOverview';
 import { Sidebar } from './components/Sidebar';
 import { StatCard } from './components/StatCard';
 import { useAuth } from './hooks/useAuth';
@@ -34,6 +35,7 @@ function DashboardApp({ user, onLogout }: { user: AuthUser; onLogout: () => void
           <StatCard label="Energía · 24 h" value={`${formatNumber(dashboard.consumption24h.energyKwh)} kWh`} detail="consumo acumulado" icon="⚡" accent="cyan"/>
           <StatCard label="Agua · 24 h" value={`${formatNumber(dashboard.consumption24h.waterLiters,0)} L`} detail="consumo acumulado" icon="◌" accent="blue"/>
         </section>
+        <section className="content-grid"><ResourceOverview /></section>
         <section className="content-grid">
           <article className="panel consumption-panel"><div className="panel-heading"><div><p className="eyebrow">Recursos</p><h3>Consumo de las últimas 24 horas</h3></div><span className="period-chip">Tiempo real</span></div><div className="resource-list">
             <div className="resource-row"><div className="resource-label"><span className="resource-symbol energy">⚡</span><span>Energía</span></div><strong>{formatNumber(dashboard.consumption24h.energyKwh)} kWh</strong></div><div className="resource-bar"><span style={{width:`${Math.min(dashboard.consumption24h.energyKwh*3,100)}%`}}/></div>
