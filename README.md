@@ -1,71 +1,221 @@
 <p align="center">
   <img src="https://img.shields.io/badge/UNAPEC-ISO--500-003B70?style=for-the-badge" alt="UNAPEC ISO-500">
+  <img src="https://img.shields.io/badge/Versi%C3%B3n-1.0.0-2EA44F?style=for-the-badge" alt="Versión 1.0.0">
+  <img src="https://img.shields.io/badge/Estado-Estable-2EA44F?style=for-the-badge" alt="Estado estable">
 </p>
 
 <h1 align="center">🏠 EcoHome</h1>
 
 <p align="center">
-  <strong>Sistema inteligente para la gestión eficiente de recursos, dispositivos y seguridad en el hogar.</strong>
+  <strong>Plataforma inteligente para monitoreo de recursos, automatización, IoT y seguridad del hogar.</strong>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Estado-Documentaci%C3%B3n%20inicial-F5A623?style=for-the-badge" alt="Estado: documentación inicial">
-  <img src="https://img.shields.io/badge/Tipo-Proyecto%20Final-6F42C1?style=for-the-badge" alt="Proyecto Final">
+  <img src="https://skillicons.dev/icons?i=python,django,react,ts,postgres,docker,nginx,github" alt="Stack tecnológico de EcoHome" />
 </p>
 
-> 🎓 **Origen académico:** EcoHome fue desarrollado como proyecto final de **Ingeniería de Requisitos (ISO-500)** en la **Universidad APEC (UNAPEC)** durante el período **Septiembre - Diciembre 2024**.
+<p align="center">
+  <img src="https://img.shields.io/badge/MQTT-Eclipse%20Mosquitto-660066?style=flat-square&logo=eclipsemosquitto&logoColor=white" alt="MQTT">
+  <img src="https://img.shields.io/badge/API-Django%20REST%20Framework-A30000?style=flat-square&logo=django&logoColor=white" alt="Django REST Framework">
+  <img src="https://img.shields.io/badge/Auth-JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white" alt="JWT">
+</p>
+
+> 🎓 **Origen académico:** EcoHome nació como proyecto final de **Ingeniería de Requisitos (ISO-500)** en la **Universidad APEC (UNAPEC)** durante el período **Septiembre - Diciembre 2024**. La versión `1.0.0` convierte esa especificación académica en una aplicación full-stack funcional y desplegable.
 
 ---
 
-## 📖 Descripción
+## ✨ Qué es EcoHome
 
-**EcoHome** es un sistema inteligente para hogares orientado a mejorar la eficiencia, el control y la seguridad mediante la integración de **automatización, dispositivos IoT y gestión centralizada de recursos domésticos**.
+EcoHome centraliza la administración de un hogar inteligente: usuarios, habitaciones, dispositivos IoT, consumo de electricidad/agua/gas, seguridad, alertas, automatizaciones, analítica histórica, recomendaciones y simulación de telemetría.
 
-El proyecto busca permitir que los usuarios puedan supervisar y administrar desde una misma plataforma el consumo de recursos, los dispositivos conectados y distintos elementos de seguridad del hogar.
+La aplicación está diseñada con separación de responsabilidades y módulos independientes para facilitar mantenimiento, pruebas y evolución futura.
 
-Entre las capacidades planteadas para EcoHome se encuentran:
+## ✅ Capacidades de la versión 1.0
 
-- ⚡ monitoreo del consumo de electricidad;
-- 💧 seguimiento del consumo de agua;
-- 🔥 seguimiento del consumo de gas;
-- 📡 integración con dispositivos IoT;
-- 💡 control remoto de iluminación y otros dispositivos conectados;
-- 🌡️ gestión de climatización y termostatos inteligentes;
-- 📷 integración con cámaras y sensores de seguridad;
-- 🚨 generación de alertas ante consumo excesivo o actividad sospechosa;
-- 📊 historial y reportes de consumo;
-- 🤖 automatización y optimización del uso de recursos;
-- 📱 acceso mediante una plataforma centralizada web o móvil.
-
-El objetivo general del proyecto es utilizar tecnología para transformar el hogar en un entorno más **eficiente, seguro, automatizado y sostenible**.
-
----
-
-## 🎯 Objetivo del proyecto
-
-Desarrollar un sistema inteligente para hogares que permita gestionar eficientemente los recursos energéticos y ofrecer mayor control y seguridad a los usuarios mediante tecnologías de automatización e inteligencia aplicada al hogar.
-
-EcoHome centraliza la supervisión de recursos y dispositivos para facilitar el control remoto, detectar situaciones relevantes y apoyar la reducción del consumo innecesario.
+- 🔐 Registro, autenticación JWT y perfiles.
+- 🏠 Hogares multiusuario con roles y aislamiento de datos.
+- 🚪 Habitaciones y catálogo de dispositivos inteligentes.
+- 📡 Comunicación MQTT, listener de telemetría y comandos remotos.
+- ⚡ Monitoreo de energía, 💧 agua y 🔥 gas.
+- 🎯 Límites de consumo, umbrales e históricos.
+- 🚨 Alertas y reglas de automatización con cooldown e historial de ejecución.
+- 🛡️ Modos de seguridad, cámaras, sensores de movimiento/puerta y eventos.
+- 📊 Dashboard, KPIs, tendencias y exportación CSV.
+- ✨ Recomendaciones inteligentes basadas en consumo, conectividad y seguridad.
+- 🧪 Simulador IoT reproducible para probar el sistema sin hardware físico.
+- 🐳 Entorno completo con Docker Compose, PostgreSQL, Mosquitto, Gunicorn y Nginx.
+- ✅ CI para Django, React/TypeScript y validación de infraestructura.
 
 ---
 
-## 🏢 Empresa académica
+## 🧱 Arquitectura
 
-| Información | Detalle |
-|---|---|
-| 🏢 Empresa | **Soluciones Tech** |
-| 🏠 Proyecto | **EcoHome** |
-| 📁 Tipo de entrega | **Proyecto Final** |
+```text
+React 19 + TypeScript + Vite
+             │
+             │ HTTPS / JSON
+             ▼
+Django 5 + DRF + SimpleJWT
+             │
+      ┌──────┴───────┐
+      ▼              ▼
+ PostgreSQL       MQTT / Mosquitto
+                     │
+                     ▼
+               Dispositivos IoT
+```
+
+El backend está organizado en aplicaciones Django modulares: `accounts`, `homes`, `devices`, `iot`, `resources`, `automation`, `security`, `reports`, `recommendations`, `simulator`, `dashboard` y `core`.
+
+Documentación ampliada: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ---
 
-## 👥 Equipo académico
+## 🛠️ Stack tecnológico real
 
-| 👤 Integrante | 🆔 Matrícula |
-|---|---|
-| 👨🏻‍💻 Andrés Beltré | A00113462 |
-| 👨🏻‍💻 Rafael Antonio De Leon Dominguez | A00113515 |
-| 👨🏻‍💻 Francis Jairo Matías Rosario | A00115261 |
+### Backend
+
+- Python 3.13
+- Django 5.2
+- Django REST Framework 3.17
+- SimpleJWT
+- Gunicorn
+- Paho MQTT
+
+### Frontend
+
+- React 19
+- TypeScript 7
+- Vite 8
+- Nginx para producción
+
+### Datos e IoT
+
+- PostgreSQL 16
+- Eclipse Mosquitto 2
+- MQTT
+
+### DevOps
+
+- Docker / Docker Compose
+- GitHub Actions
+- Health/readiness checks
+
+---
+
+## 🚀 Ejecutar con Docker
+
+```bash
+git clone https://github.com/Jairo0811/EcoHome.git
+cd EcoHome
+cp .env.example .env
+docker compose up --build -d
+```
+
+Abre `http://localhost:8080`.
+
+Verifica los servicios:
+
+```bash
+docker compose ps
+curl http://localhost:8080/api/v1/health/
+curl http://localhost:8080/api/v1/health/ready/
+```
+
+Para apagar:
+
+```bash
+docker compose down
+```
+
+Consulta [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) antes de un despliegue real.
+
+---
+
+## 🧪 Desarrollo y pruebas
+
+### Backend
+
+```bash
+cd backend
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# Linux/macOS: source .venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py test
+python manage.py runserver
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run typecheck
+npm run dev
+```
+
+El CI ejecuta system checks, verificación de migraciones, migraciones, compilación Python, tests, typecheck TypeScript, build Vite y validación de Docker Compose.
+
+---
+
+## 📡 IoT y simulador
+
+Tópicos MQTT principales:
+
+```text
+ecohome/{home_id}/devices/{external_id}
+ecohome/{home_id}/devices/{external_id}/commands
+```
+
+Listener:
+
+```bash
+cd backend
+python manage.py run_mqtt_listener
+```
+
+Simulador:
+
+```bash
+python manage.py simulate_iot --home 1 --steps 10 --seed 42
+```
+
+El simulador utiliza el mismo pipeline de ingesta que los dispositivos reales, por lo que alimenta dashboards, límites, alertas y automatizaciones.
+
+---
+
+## 🔌 API
+
+La API vive bajo `/api/v1`. Sus áreas principales son:
+
+```text
+/auth/
+/homes/
+/rooms/
+/devices/
+/telemetry/
+/iot/
+/resources/
+/automation/
+/security/
+/reports/
+/recommendations/
+/simulator/
+/dashboard/
+/health/
+```
+
+Referencia ampliada: [`docs/API.md`](docs/API.md).
+
+---
+
+## 🔒 Seguridad
+
+EcoHome aplica autorización por hogar, JWT, throttling de API, configuración segura por variables de entorno, cookies seguras según entorno, HSTS configurable, protección contra framing/sniffing y ejecución no-root del backend en contenedores.
+
+El broker MQTT incluido en Compose permite conexiones anónimas para facilitar desarrollo local; **debe configurarse con autenticación, ACL y TLS antes de exponerlo en producción**. Consulta [`SECURITY.md`](SECURITY.md).
 
 ---
 
@@ -73,124 +223,59 @@ EcoHome centraliza la supervisión de recursos y dispositivos para facilitar el 
 
 | Información | Detalle |
 |---|---|
+| 🏢 Empresa académica | **Soluciones Tech** |
 | 📖 Asignatura | **Ingeniería de Requisitos (ISO-500)** |
 | 👨‍🏫 Profesor | **Ing. Eddy G. Alcantara Solano** |
 | 🏫 Institución | **Universidad APEC (UNAPEC)** |
 | 📅 Período académico | **Septiembre - Diciembre 2024** |
 | 📁 Tipo de entrega | **Proyecto Final** |
 
-## 🧭 Continuidad académica
+### 👥 Equipo académico original
 
-**EcoHome** forma parte de la trayectoria académica documentada de Francis Jairo Matías Rosario en la Universidad APEC (UNAPEC). Siguiendo el mismo criterio aplicado en EcoSoft, la continuidad se registra únicamente cuando existe una coincidencia verificable por **estudiante** o **profesor**; no se infieren relaciones por similitud de nombres, períodos o referencias aisladas.
-
-### 👥 Continuidad por estudiante
-
-El equipo académico original estuvo compuesto por **Andrés Beltré (A00113462)**, **Rafael Antonio De Leon Dominguez (A00113515)** y **Francis Jairo Matías Rosario (A00115261)**.
-
-Dentro de los proyectos actualmente documentados en esta colección no se ha verificado que Andrés Beltré o Rafael Antonio De Leon Dominguez vuelvan a coincidir con Francis Jairo Matías Rosario en otro equipo académico por **mismo nombre completo y misma matrícula**.
-
-### 👨‍🏫 Continuidad por profesor
-
-El profesor de **Ingeniería de Requisitos (ISO-500)** fue **Ing. Eddy G. Alcantara Solano**. En la colección actual no se ha verificado una segunda asignatura cursada por Francis Jairo Matías Rosario con el mismo profesor.
-
-| Tipo | Estado | Evidencia |
-|---|---|---|
-| 👥 Estudiante recurrente | No verificado | No existe una segunda coincidencia inequívoca en los proyectos documentados |
-| 👨‍🏫 Profesor recurrente | No verificado | Solo se ha documentado ISO-500 con Ing. Eddy G. Alcantara Solano |
-
-EcoHome conserva así su lugar dentro de la trayectoria académica sin atribuirle una continuidad directa que todavía no está demostrada.
-
----
-
-## 🧩 Alcance conceptual
-
-EcoHome fue concebido alrededor de cuatro áreas principales:
-
-| Área | Alcance |
+| 👤 Integrante | 🆔 Matrícula |
 |---|---|
-| ⚡ **Gestión de recursos** | Monitoreo y optimización del consumo de electricidad, agua y gas |
-| 🛡️ **Seguridad inteligente** | Cámaras, sensores y alertas ante actividades sospechosas |
-| 📡 **Control de dispositivos** | Automatización y control remoto de dispositivos domésticos conectados |
-| 📱 **Plataforma centralizada** | Gestión de las funciones del hogar desde una aplicación web o móvil |
+| 👨🏻‍💻 Andrés Beltré | A00113462 |
+| 👨🏻‍💻 Rafael Antonio De Leon Dominguez | A00113515 |
+| 👨🏻‍💻 Francis Jairo Matías Rosario | A00115261 |
+
+### 🧭 Continuidad académica
+
+La continuidad se documenta únicamente cuando existe una coincidencia verificable por estudiante o profesor. Dentro de los proyectos actualmente documentados no se ha verificado una segunda coincidencia inequívoca de Andrés Beltré o Rafael Antonio De Leon Dominguez con Francis Jairo Matías Rosario, ni una segunda asignatura con **Ing. Eddy G. Alcantara Solano**.
 
 ---
 
-## 🛠️ Stack tecnológico
+## 🗺️ Evolución completada
 
-La documentación académica de EcoHome propone una arquitectura **cliente-servidor** con tecnologías web e integración IoT. Este stack representa la base técnica definida para el proyecto original.
+| Fase | Resultado |
+|---|---|
+| 0 | Recuperación, análisis y planificación |
+| 1 | Base full-stack y dashboard inicial |
+| 2 | Autenticación e identidad |
+| 3 | Hogares, habitaciones, miembros y dispositivos |
+| 4 | MQTT, IoT y telemetría |
+| 5 | Recursos: electricidad, agua y gas |
+| 6 | Alertas y automatizaciones |
+| 7 | Seguridad inteligente |
+| 8 | Analítica, históricos y reportes |
+| 9 | Recomendaciones inteligentes |
+| 10 | Simulador IoT |
+| 11 | Hardening, CI y producción |
+| 12 | UI/UX final, documentación y `v1.0.0` |
 
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=python,django,react,js,postgres" alt="Python, Django, React, JavaScript y PostgreSQL" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/MQTT-IoT-660066?style=for-the-badge&logo=mqtt&logoColor=white" alt="MQTT">
-  <img src="https://img.shields.io/badge/HTTPS-Comunicaci%C3%B3n%20segura-0F766E?style=for-the-badge&logo=letsencrypt&logoColor=white" alt="HTTPS">
-  <img src="https://img.shields.io/badge/IoT-Dispositivos%20conectados-2563EB?style=for-the-badge&logo=homeassistant&logoColor=white" alt="IoT">
-</p>
-
-<p align="center">
-  <strong>Python · Django · React.js · JavaScript · PostgreSQL · MQTT / MQTT.js · HTTPS · IoT</strong>
-</p>
-
-### ⚙️ Backend
-
-<p>
-  <img src="https://skillicons.dev/icons?i=python,django" alt="Python y Django" />
-</p>
-
-- **Python:** lenguaje propuesto para la lógica del servidor.
-- **Django:** framework backend planteado para desarrollar la aplicación y gestionar la lógica de negocio.
-- **Arquitectura cliente-servidor:** modelo definido para separar la interfaz de usuario de los servicios y datos del sistema.
-
-### 🎨 Frontend
-
-<p>
-  <img src="https://skillicons.dev/icons?i=react,js" alt="React y JavaScript" />
-</p>
-
-- **React.js:** tecnología propuesta para construir la interfaz web.
-- **JavaScript:** lenguaje del cliente y base de las bibliotecas utilizadas en el frontend y la integración IoT.
-- **Diseño responsive:** la interfaz fue concebida para adaptarse a navegadores y dispositivos móviles.
-
-### 🗄️ Base de datos
-
-<p>
-  <img src="https://skillicons.dev/icons?i=postgres" alt="PostgreSQL" />
-</p>
-
-- **PostgreSQL:** sistema de gestión de base de datos relacional definido para almacenar usuarios, dispositivos, configuraciones, consumos, alertas e historiales.
-
-### 📡 IoT y comunicación
-
-<p>
-  <img src="https://img.shields.io/badge/MQTT.js-Integraci%C3%B3n%20IoT-660066?style=flat-square&logo=mqtt&logoColor=white" alt="MQTT.js">
-  <img src="https://img.shields.io/badge/HTTPS-Comunicaci%C3%B3n%20segura-0F766E?style=flat-square&logo=letsencrypt&logoColor=white" alt="HTTPS">
-  <img src="https://img.shields.io/badge/IoT-Sensores%20%26%20dispositivos-2563EB?style=flat-square&logo=homeassistant&logoColor=white" alt="IoT">
-</p>
-
-- **MQTT:** protocolo previsto para la comunicación con dispositivos IoT.
-- **MQTT.js:** biblioteca propuesta para la integración y mensajería con dispositivos conectados.
-- **HTTPS:** protocolo previsto para proteger la comunicación entre clientes y servicios.
-- **Dispositivos IoT:** sensores, cámaras, iluminación, termostatos y otros dispositivos domésticos inteligentes.
-- **Simulación de hardware:** la factibilidad técnica contempla herramientas de simulación para probar integraciones sin depender exclusivamente de hardware físico.
-
-### 📱 Plataformas contempladas
-
-La documentación de requisitos contempla una experiencia accesible desde web y dispositivos móviles, indicando compatibilidad mínima con **Android 8.0** e **iOS 12.0**.
-
-> El stack anterior corresponde a la **propuesta técnica documentada en el proyecto académico**. Las versiones concretas de frameworks, bibliotecas y herramientas de infraestructura se definirán durante la implementación del repositorio.
+**EcoHome 1.0 está funcionalmente completo dentro del alcance definido para esta recuperación.**
 
 ---
 
-## 🚧 Estado del repositorio
+## 📚 Documentación
 
-El repositorio se encuentra actualmente en su etapa inicial de documentación y definición técnica.
-
-Los próximos pasos incluirán la organización de la documentación original, definición de arquitectura, selección definitiva de versiones del stack tecnológico y planificación de las primeras fases de implementación.
+- [Arquitectura](docs/ARCHITECTURE.md)
+- [API](docs/API.md)
+- [Despliegue](docs/DEPLOYMENT.md)
+- [Seguridad](SECURITY.md)
+- [Historial de cambios](CHANGELOG.md)
 
 ---
 
 <p align="center">
-  <strong>EcoHome · Universidad APEC (UNAPEC)</strong>
+  <strong>EcoHome v1.0.0 · Universidad APEC (UNAPEC) · Proyecto académico evolucionado a plataforma full-stack</strong>
 </p>

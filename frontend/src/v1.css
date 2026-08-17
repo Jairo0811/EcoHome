@@ -1,0 +1,159 @@
+/* EcoHome 1.0 — capa final de refinamiento visual y accesibilidad. */
+
+:root {
+  color-scheme: dark;
+  --v1-surface: rgba(9, 28, 38, 0.82);
+  --v1-border: rgba(126, 238, 187, 0.14);
+  --v1-focus: #8af0b7;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(49, 188, 155, 0.08), transparent 30rem),
+    radial-gradient(circle at 100% 25%, rgba(43, 139, 211, 0.08), transparent 34rem),
+    #06131c;
+}
+
+.main-content {
+  width: min(100%, 1680px);
+  margin-inline: auto;
+}
+
+.topbar,
+.hero-panel,
+.panel,
+.stat-card {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.hero-panel,
+.panel,
+.stat-card {
+  border-color: var(--v1-border);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.18);
+}
+
+.panel,
+.stat-card,
+.hero-panel {
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.panel:hover,
+.stat-card:hover {
+  border-color: rgba(126, 238, 187, 0.24);
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--v1-focus);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.56;
+}
+
+.device-row {
+  min-width: 0;
+}
+
+.device-copy {
+  min-width: 0;
+}
+
+.device-copy strong,
+.device-copy span {
+  overflow-wrap: anywhere;
+}
+
+.resource-bar > span {
+  transition: width 420ms ease;
+}
+
+@media (max-width: 1180px) {
+  .content-grid,
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .topbar {
+    align-items: flex-start;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 760px) {
+  .app-shell {
+    display: block;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+    min-height: auto;
+  }
+
+  .main-content {
+    padding: 18px;
+  }
+
+  .topbar,
+  .hero-panel,
+  .panel-heading,
+  .device-row {
+    align-items: flex-start;
+  }
+
+  .topbar,
+  .hero-panel,
+  .panel-heading {
+    flex-direction: column;
+  }
+
+  .stats-grid,
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions,
+  .topbar-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .primary-button,
+  .secondary-button,
+  .logout-button {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
