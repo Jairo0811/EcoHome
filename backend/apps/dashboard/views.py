@@ -9,9 +9,9 @@ from apps.devices.models import Device, Telemetry
 from apps.homes.models import Home
 
 
-def metric_total(metric: str, since) -> float:
+def metric_total(queryset, metric: str, since) -> float:
     value = (
-        Telemetry.objects.filter(metric=metric, recorded_at__gte=since)
+        queryset.filter(metric=metric, recorded_at__gte=since)
         .aggregate(total=Sum("value"))
         .get("total")
     )
@@ -21,20 +21,29 @@ def metric_total(metric: str, since) -> float:
 @api_view(["GET"])
 def summary(request):
     since = timezone.now() - timedelta(hours=24)
-    recent_devices = Device.objects.select_related("room").order_by("-last_seen_at")[:5]
+    homes = Home.objects.all()
+    devices = Device.objects.select_related("room", "home").all()
+    telemetry = Telemetry.objects.select_related("device", "device__home").all()
+
+    if not request.user.is_staff:
+        homes = homes.filter(owner=request.user)
+        devices = devices.filter(home__owner=request.user)
+        telemetry = telemetry.filter(device__home__owner=request.user)
+
+    recent_devices = devices.order_by("-last_seen_at")[:5]
 
     return Response(
         {
-            "homes": Home.objects.count(),
+            "homes": homes.count(),
             "devices": {
-                "total": Device.objects.count(),
-                "online": Device.objects.filter(status=Device.Status.ONLINE).count(),
-                "warning": Device.objects.filter(status=Device.Status.WARNING).count(),
+                "total": devices.count(),
+                "online": devices.filter(status=Device.Status.ONLINE).count(),
+                "warning": devices.filter(status=Device.Status.WARNING).count(),
             },
             "consumption24h": {
-                "energyKwh": metric_total(Telemetry.Metric.ENERGY_KWH, since),
-                "waterLiters": metric_total(Telemetry.Metric.WATER_L, since),
-                "gasM3": metric_total(Telemetry.Metric.GAS_M3, since),
+                "energyKwh": metric_total(telemetry, Telemetry.Metric.ENERGY_KWH, since),
+                "waterLiters": metric_total(telemetry, Telemetry.Metric.WATER_L, since),
+                "gasM3": metric_total(telemetry, Telemetry.Metric.GAS_M3, since),
             },
             "recentDevices": [
                 {

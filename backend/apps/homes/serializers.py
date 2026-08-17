@@ -12,8 +12,9 @@ class RoomSerializer(serializers.ModelSerializer):
 
 class HomeSerializer(serializers.ModelSerializer):
     rooms = RoomSerializer(many=True, read_only=True)
+    owner = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Home
-        fields = ["id", "name", "address", "timezone", "created_at", "updated_at", "rooms"]
-        read_only_fields = ["id", "created_at", "updated_at"]
+        fields = ["id", "owner", "name", "address", "timezone", "created_at", "updated_at", "rooms"]
+        read_only_fields = ["id", "owner", "created_at", "updated_at"]

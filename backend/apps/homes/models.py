@@ -1,7 +1,15 @@
+from django.conf import settings
 from django.db import models
 
 
 class Home(models.Model):
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="ecohome_homes",
+    )
     name = models.CharField(max_length=120)
     address = models.CharField(max_length=255, blank=True)
     timezone = models.CharField(max_length=64, default="America/Santo_Domingo")
