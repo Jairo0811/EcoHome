@@ -1,8 +1,14 @@
 <p align="center">
   <img src="https://img.shields.io/badge/UNAPEC-ISO--500-003B70?style=for-the-badge" alt="UNAPEC ISO-500">
+
+</p>
+
+<p align="center">
+
   <img src="https://img.shields.io/badge/Versi%C3%B3n-1.0.0-2EA44F?style=for-the-badge" alt="Versión 1.0.0">
   <img src="https://img.shields.io/badge/Estado-Estable-2EA44F?style=for-the-badge" alt="Estado estable">
 </p>
+
 
 <h1 align="center">🏠 EcoHome</h1>
 
