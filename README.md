@@ -17,10 +17,6 @@
 </p>
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=python,django,react,ts,postgres,docker,nginx,github" alt="Stack tecnológico de EcoHome" />
-</p>
-
-<p align="center">
   <img src="https://img.shields.io/badge/MQTT-Eclipse%20Mosquitto-660066?style=flat-square&logo=eclipsemosquitto&logoColor=white" alt="MQTT">
   <img src="https://img.shields.io/badge/API-Django%20REST%20Framework-A30000?style=flat-square&logo=django&logoColor=white" alt="Django REST Framework">
   <img src="https://img.shields.io/badge/Auth-JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white" alt="JWT">
@@ -79,7 +75,11 @@ Documentación ampliada: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ## 🛠️ Stack tecnológico real
 
-### Backend
+### ⚙️ Backend
+
+<p>
+  <img src="https://skillicons.dev/icons?i=python,django" alt="Python y Django" />
+</p>
 
 - Python 3.13
 - Django 5.2
@@ -88,20 +88,33 @@ Documentación ampliada: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 - Gunicorn
 - Paho MQTT
 
-### Frontend
+### 🎨 Frontend
+
+<p>
+  <img src="https://skillicons.dev/icons?i=react,ts,vite" alt="React, TypeScript y Vite" />
+</p>
 
 - React 19
 - TypeScript 7
 - Vite 8
 - Nginx para producción
 
-### Datos e IoT
+### 🗄️ Datos e IoT
+
+<p>
+  <img src="https://skillicons.dev/icons?i=postgres" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/MQTT-Eclipse%20Mosquitto-660066?style=flat-square&logo=eclipsemosquitto&logoColor=white" alt="MQTT y Eclipse Mosquitto" />
+</p>
 
 - PostgreSQL 16
 - Eclipse Mosquitto 2
 - MQTT
 
-### DevOps
+### 🧰 DevOps
+
+<p>
+  <img src="https://skillicons.dev/icons?i=docker,nginx,github,githubactions" alt="Docker, Nginx, GitHub y GitHub Actions" />
+</p>
 
 - Docker / Docker Compose
 - GitHub Actions
@@ -140,7 +153,11 @@ Consulta [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) antes de un despliegue real.
 
 ## 🧪 Desarrollo y pruebas
 
-### Backend
+### ⚙️ Backend
+
+<p>
+  <img src="https://skillicons.dev/icons?i=python,django" alt="Python y Django" />
+</p>
 
 ```bash
 cd backend
@@ -153,7 +170,11 @@ python manage.py test
 python manage.py runserver
 ```
 
-### Frontend
+### 🎨 Frontend
+
+<p>
+  <img src="https://skillicons.dev/icons?i=react,ts,vite" alt="React, TypeScript y Vite" />
+</p>
 
 ```bash
 cd frontend
