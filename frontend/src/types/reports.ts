@@ -1,0 +1,1 @@
+export type TrendPoint={date:string;total:number};export type ReportOverview={periodDays:number;homes:number;devices:{total:number;online:number};alerts:{open:number;critical:number};securityEvents:number;automationExecutions:number;trends:Record<'ENERGY_KWH'|'WATER_L'|'GAS_M3',TrendPoint[]>};
