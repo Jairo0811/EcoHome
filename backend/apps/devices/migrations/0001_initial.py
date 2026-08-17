@@ -37,6 +37,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AddIndex(
             model_name="telemetry",
-            index=models.Index(fields=["device", "metric", "recorded_at"], name="idx_telemetry_device_metric_time"),
+            index=models.Index(fields=["device", "metric", "recorded_at"], name="idx_dev_metric_time"),
         ),
     ]

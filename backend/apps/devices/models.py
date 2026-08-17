@@ -55,7 +55,7 @@ class Telemetry(models.Model):
     class Meta:
         ordering = ["-recorded_at"]
         indexes = [
-            models.Index(fields=["device", "metric", "recorded_at"], name="idx_telemetry_device_metric_time")
+            models.Index(fields=["device", "metric", "recorded_at"], name="idx_dev_metric_time")
         ]
 
     def __str__(self) -> str:
