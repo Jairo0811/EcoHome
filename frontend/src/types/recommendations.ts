@@ -1,0 +1,1 @@
+export type Recommendation={id:number;home:number;key:string;category:string;priority:'LOW'|'MEDIUM'|'HIGH';title:string;description:string;estimated_savings_percent:number;status:string;generated_at:string};
