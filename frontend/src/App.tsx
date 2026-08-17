@@ -1,5 +1,6 @@
 import { DeviceStatus } from './components/DeviceStatus';
 import { LoginScreen } from './components/LoginScreen';
+import { OperationsOverview } from './components/OperationsOverview';
 import { ResourceOverview } from './components/ResourceOverview';
 import { Sidebar } from './components/Sidebar';
 import { StatCard } from './components/StatCard';
@@ -44,6 +45,7 @@ function DashboardApp({ user, onLogout }: { user: AuthUser; onLogout: () => void
           </div></article>
           <article className="panel devices-panel"><div className="panel-heading"><div><p className="eyebrow">IoT</p><h3>Dispositivos recientes</h3></div><span className="device-count">{dashboard.devices.total}</span></div>{dashboard.recentDevices.length===0?<div className="empty-state"><div className="empty-icon">◉</div><strong>Aún no hay dispositivos</strong><p>Los dispositivos vinculados aparecerán aquí.</p></div>:<div className="device-list">{dashboard.recentDevices.map(device=><div className="device-row" key={device.id}><div className="device-icon">◉</div><div className="device-copy"><strong>{device.name}</strong><span>{device.room??'Sin habitación'} · {device.type}</span></div><DeviceStatus status={device.status}/></div>)}</div>}</article>
         </section>
+        <section className="content-grid"><OperationsOverview /></section>
       </main>
     </div>
   );
