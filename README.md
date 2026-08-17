@@ -13,6 +13,8 @@
   <img src="https://img.shields.io/badge/Tipo-Proyecto%20Final-6F42C1?style=for-the-badge" alt="Proyecto Final">
 </p>
 
+> 🎓 **Origen académico:** EcoHome fue desarrollado como proyecto final de **Ingeniería de Requisitos (ISO-500)** en la **Universidad APEC (UNAPEC)** durante el período **Septiembre - Diciembre 2024**.
+
 ---
 
 ## 📖 Descripción
@@ -74,6 +76,7 @@ EcoHome centraliza la supervisión de recursos y dispositivos para facilitar el 
 | 📖 Asignatura | **Ingeniería de Requisitos (ISO-500)** |
 | 👨‍🏫 Profesor | **Ing. Eddy G. Alcantara Solano** |
 | 🏫 Institución | **Universidad APEC (UNAPEC)** |
+| 📅 Período académico | **Septiembre - Diciembre 2024** |
 | 📁 Tipo de entrega | **Proyecto Final** |
 
 ---
