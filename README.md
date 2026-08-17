@@ -72,7 +72,7 @@ EcoHome centraliza la supervisión de recursos y dispositivos para facilitar el 
 | Información | Detalle |
 |---|---|
 | 📖 Asignatura | **Ingeniería de Requisitos (ISO-500)** |
-| 👨‍🏫 Profesor | **Por confirmar** |
+| 👨‍🏫 Profesor | **Ing. Eddy G. Alcantara Solano** |
 | 🏫 Institución | **Universidad APEC (UNAPEC)** |
 | 📁 Tipo de entrega | **Proyecto Final** |
 
