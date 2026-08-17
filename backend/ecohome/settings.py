@@ -10,7 +10,7 @@ if not DEBUG and SECRET_KEY == "dev-only-change-me-please-use-a-real-secret-key"
 ALLOWED_HOSTS = [host.strip() for host in os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if host.strip()]
 INSTALLED_APPS = [
     "django.contrib.admin", "django.contrib.auth", "django.contrib.contenttypes", "django.contrib.sessions", "django.contrib.messages", "django.contrib.staticfiles",
-    "rest_framework", "apps.core", "apps.accounts", "apps.homes", "apps.devices", "apps.iot", "apps.dashboard",
+    "rest_framework", "apps.core", "apps.accounts", "apps.homes", "apps.devices", "apps.iot", "apps.resources", "apps.dashboard",
 ]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware", "django.contrib.sessions.middleware.SessionMiddleware", "django.middleware.common.CommonMiddleware",
