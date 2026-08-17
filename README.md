@@ -94,11 +94,79 @@ EcoHome fue concebido alrededor de cuatro áreas principales:
 
 ---
 
+## 🛠️ Stack tecnológico
+
+La documentación académica de EcoHome propone una arquitectura **cliente-servidor** con tecnologías web e integración IoT. Este stack representa la base técnica definida para el proyecto original.
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=python,django,react,js,postgres" alt="Python, Django, React, JavaScript y PostgreSQL" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/MQTT-IoT-660066?style=for-the-badge&logo=mqtt&logoColor=white" alt="MQTT">
+  <img src="https://img.shields.io/badge/HTTPS-Comunicaci%C3%B3n%20segura-0F766E?style=for-the-badge&logo=letsencrypt&logoColor=white" alt="HTTPS">
+  <img src="https://img.shields.io/badge/IoT-Dispositivos%20conectados-2563EB?style=for-the-badge&logo=homeassistant&logoColor=white" alt="IoT">
+</p>
+
+<p align="center">
+  <strong>Python · Django · React.js · JavaScript · PostgreSQL · MQTT / MQTT.js · HTTPS · IoT</strong>
+</p>
+
+### ⚙️ Backend
+
+<p>
+  <img src="https://skillicons.dev/icons?i=python,django" alt="Python y Django" />
+</p>
+
+- **Python:** lenguaje propuesto para la lógica del servidor.
+- **Django:** framework backend planteado para desarrollar la aplicación y gestionar la lógica de negocio.
+- **Arquitectura cliente-servidor:** modelo definido para separar la interfaz de usuario de los servicios y datos del sistema.
+
+### 🎨 Frontend
+
+<p>
+  <img src="https://skillicons.dev/icons?i=react,js" alt="React y JavaScript" />
+</p>
+
+- **React.js:** tecnología propuesta para construir la interfaz web.
+- **JavaScript:** lenguaje del cliente y base de las bibliotecas utilizadas en el frontend y la integración IoT.
+- **Diseño responsive:** la interfaz fue concebida para adaptarse a navegadores y dispositivos móviles.
+
+### 🗄️ Base de datos
+
+<p>
+  <img src="https://skillicons.dev/icons?i=postgres" alt="PostgreSQL" />
+</p>
+
+- **PostgreSQL:** sistema de gestión de base de datos relacional definido para almacenar usuarios, dispositivos, configuraciones, consumos, alertas e historiales.
+
+### 📡 IoT y comunicación
+
+<p>
+  <img src="https://img.shields.io/badge/MQTT.js-Integraci%C3%B3n%20IoT-660066?style=flat-square&logo=mqtt&logoColor=white" alt="MQTT.js">
+  <img src="https://img.shields.io/badge/HTTPS-Comunicaci%C3%B3n%20segura-0F766E?style=flat-square&logo=letsencrypt&logoColor=white" alt="HTTPS">
+  <img src="https://img.shields.io/badge/IoT-Sensores%20%26%20dispositivos-2563EB?style=flat-square&logo=homeassistant&logoColor=white" alt="IoT">
+</p>
+
+- **MQTT:** protocolo previsto para la comunicación con dispositivos IoT.
+- **MQTT.js:** biblioteca propuesta para la integración y mensajería con dispositivos conectados.
+- **HTTPS:** protocolo previsto para proteger la comunicación entre clientes y servicios.
+- **Dispositivos IoT:** sensores, cámaras, iluminación, termostatos y otros dispositivos domésticos inteligentes.
+- **Simulación de hardware:** la factibilidad técnica contempla herramientas de simulación para probar integraciones sin depender exclusivamente de hardware físico.
+
+### 📱 Plataformas contempladas
+
+La documentación de requisitos contempla una experiencia accesible desde web y dispositivos móviles, indicando compatibilidad mínima con **Android 8.0** e **iOS 12.0**.
+
+> El stack anterior corresponde a la **propuesta técnica documentada en el proyecto académico**. Las versiones concretas de frameworks, bibliotecas y herramientas de infraestructura se definirán durante la implementación del repositorio.
+
+---
+
 ## 🚧 Estado del repositorio
 
 El repositorio se encuentra actualmente en su etapa inicial de documentación y definición técnica.
 
-Los próximos pasos incluirán la organización de la documentación original, definición de arquitectura, selección definitiva del stack tecnológico y planificación de las primeras fases de implementación.
+Los próximos pasos incluirán la organización de la documentación original, definición de arquitectura, selección definitiva de versiones del stack tecnológico y planificación de las primeras fases de implementación.
 
 ---
 
