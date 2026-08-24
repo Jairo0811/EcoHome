@@ -9,9 +9,6 @@
   <img src="https://img.shields.io/badge/Estado-Estable-2EA44F?style=for-the-badge" alt="Estado estable">
 </p>
 
-
-<h1 align="center">🏠 EcoHome</h1>
-
 <p align="center">
   <strong>Plataforma inteligente para monitoreo de recursos, automatización, IoT y seguridad del hogar.</strong>
 </p>
