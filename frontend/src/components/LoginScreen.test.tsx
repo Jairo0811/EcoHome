@@ -1,8 +1,10 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { LoginScreen } from './LoginScreen';
+
+afterEach(cleanup);
 
 describe('LoginScreen', () => {
   it('envía las credenciales introducidas por el usuario', async () => {
@@ -23,7 +25,7 @@ describe('LoginScreen', () => {
   it('muestra el error de autenticación recibido', () => {
     render(<LoginScreen error="Credenciales inválidas" onLogin={vi.fn()} />);
 
-    expect(screen.getByText('Credenciales inválidas')).toBeTruthy();
+    expect(screen.getByRole('alert').textContent).toBe('Credenciales inválidas');
   });
 
   it('marca usuario y contraseña como campos obligatorios', () => {
