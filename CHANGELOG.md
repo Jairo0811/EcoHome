@@ -2,6 +2,20 @@
 
 Todos los cambios relevantes de EcoHome se documentan en este archivo.
 
+## [1.1.0] - 2026-09-04
+
+### Calidad
+- Se incorpora Vitest con Testing Library para pruebas automatizadas del frontend.
+- Se añaden pruebas del flujo de autenticación y de las etiquetas de estado de dispositivos IoT.
+- El CI ahora ejecuta typecheck, pruebas frontend, auditoría de dependencias de producción y build de Vite.
+- Se añade Dependabot para dependencias Python, npm, GitHub Actions y Docker.
+
+### Accesibilidad
+- Se mejora la semántica de la pantalla de inicio de sesión con `aria-labelledby`, `aria-busy`, contenido decorativo oculto a lectores de pantalla y errores anunciados con `role="alert"`.
+
+### Alcance
+- EcoHome se mantiene como proyecto académico evolucionado y proyecto de portafolio; esta versión refuerza calidad y mantenibilidad sin convertirlo en un producto comercial.
+
 ## [1.0.0] - 2026-08-17
 
 ### Añadido
