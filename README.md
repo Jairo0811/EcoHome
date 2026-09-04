@@ -56,6 +56,18 @@ La configuración incluida prioriza una experiencia local reproducible. Antes de
 - ♿ Mejoras de semántica accesible en autenticación.
 - 🔄 Dependabot para mantenimiento periódico de dependencias.
 
+### 🆕 Novedades incorporadas en `v1.1.0`
+
+- 🧪 **Pruebas automatizadas de componentes React** para validar el flujo de inicio de sesión y los estados visuales de dispositivos IoT.
+- ♿ **Autenticación más accesible**, con mensajes de error anunciables, estados de carga expuestos correctamente a tecnologías de asistencia y mejor semántica del formulario.
+- 🧹 **Aislamiento determinístico de pruebas frontend**, limpiando el DOM entre casos para evitar interferencias y falsos positivos.
+- 🛡️ **Quality gate frontend** mediante `npm run check`, combinando typecheck, pruebas automatizadas y build de producción.
+- 🔍 **Auditoría automática de dependencias npm de producción** integrada en GitHub Actions.
+- 🔄 **Actualización automática de dependencias con Dependabot** para pip, npm, GitHub Actions y Docker.
+- ⚙️ **Entorno CI estabilizado** con versiones compatibles de npm, Vitest y jsdom para mantener builds reproducibles con Vite 8.
+- ✅ **Validación completa de cada cambio**: backend Django, migraciones, pruebas Python, frontend React/TypeScript, auditoría de dependencias y configuración Docker Compose.
+- 🧰 **Base preparada para pruebas manuales y regresión**, permitiendo concentrar la siguiente etapa del proyecto en detección y corrección de errores sin ampliar el alcance funcional.
+
 ---
 
 ## 🧱 Arquitectura
