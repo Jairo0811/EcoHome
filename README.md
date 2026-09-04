@@ -1,16 +1,15 @@
 <p align="center">
-  <img src="docs/images/EcoHome-logo.jpeg" alt="Logo de BarberTurn" width="720" />
+  <img src="docs/images/EcoHome-logo.jpeg" alt="Logo de EcoHome" width="720" />
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/UNAPEC-ISO--500-003B70?style=for-the-badge" alt="UNAPEC ISO-500">
-
 </p>
 
 <p align="center">
-
-  <img src="https://img.shields.io/badge/Versi%C3%B3n-1.0.0-2EA44F?style=for-the-badge" alt="Versión 1.0.0">
-  <img src="https://img.shields.io/badge/Estado-Estable-2EA44F?style=for-the-badge" alt="Estado estable">
+  <img src="https://img.shields.io/badge/Versi%C3%B3n-1.1.0-2EA44F?style=for-the-badge" alt="Versión 1.1.0">
+  <img src="https://img.shields.io/badge/Estado-Proyecto%20estable-2EA44F?style=for-the-badge" alt="Estado: proyecto estable">
+  <img src="https://img.shields.io/badge/Tipo-Portafolio-6F42C1?style=for-the-badge" alt="Proyecto de portafolio">
 </p>
 
 <p align="center">
@@ -23,7 +22,7 @@
   <img src="https://img.shields.io/badge/Auth-JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white" alt="JWT">
 </p>
 
-> 🎓 **Origen académico:** EcoHome nació como proyecto final de **Ingeniería de Requisitos (ISO-500)** en la **Universidad APEC (UNAPEC)** durante el período **Septiembre - Diciembre 2024**. La versión `1.0.0` convierte esa especificación académica en una aplicación full-stack funcional y desplegable.
+> 🎓 **Origen académico:** EcoHome nació como proyecto final de **Ingeniería de Requisitos (ISO-500)** en la **Universidad APEC (UNAPEC)** durante el período **Septiembre - Diciembre 2024**. La versión `1.1.0` conserva ese origen y lo evoluciona a un proyecto full-stack funcional, reproducible y mantenible.
 
 ---
 
@@ -33,7 +32,13 @@ EcoHome centraliza la administración de un hogar inteligente: usuarios, habitac
 
 La aplicación está diseñada con separación de responsabilidades y módulos independientes para facilitar mantenimiento, pruebas y evolución futura.
 
-## ✅ Capacidades de la versión 1.0
+### 📌 Estado y alcance
+
+EcoHome se mantiene deliberadamente como **proyecto académico evolucionado y proyecto de portafolio**. Su objetivo es demostrar arquitectura full-stack, integración IoT, seguridad, automatización, pruebas y prácticas DevOps; no se presenta como un servicio comercial ni como una plataforma pública con SLA.
+
+La configuración incluida prioriza una experiencia local reproducible. Antes de exponer el sistema a Internet deben endurecerse secretos, hosts, TLS y especialmente la autenticación/ACL del broker MQTT, tal como se documenta en [`SECURITY.md`](SECURITY.md).
+
+## ✅ Capacidades de la versión 1.1
 
 - 🔐 Registro, autenticación JWT y perfiles.
 - 🏠 Hogares multiusuario con roles y aislamiento de datos.
@@ -47,7 +52,9 @@ La aplicación está diseñada con separación de responsabilidades y módulos i
 - ✨ Recomendaciones inteligentes basadas en consumo, conectividad y seguridad.
 - 🧪 Simulador IoT reproducible para probar el sistema sin hardware físico.
 - 🐳 Entorno completo con Docker Compose, PostgreSQL, Mosquitto, Gunicorn y Nginx.
-- ✅ CI para Django, React/TypeScript y validación de infraestructura.
+- ✅ CI para Django, React/TypeScript, pruebas frontend, auditoría npm y validación de infraestructura.
+- ♿ Mejoras de semántica accesible en autenticación.
+- 🔄 Dependabot para mantenimiento periódico de dependencias.
 
 ---
 
@@ -98,7 +105,9 @@ Documentación ampliada: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 - React 19
 - TypeScript 7
 - Vite 8
-- Nginx para producción
+- Vitest
+- Testing Library
+- Nginx para producción/demo contenedorizada
 
 ### 🗄️ Datos e IoT
 
@@ -119,6 +128,7 @@ Documentación ampliada: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 - Docker / Docker Compose
 - GitHub Actions
+- Dependabot
 - Health/readiness checks
 
 ---
@@ -148,7 +158,7 @@ Para apagar:
 docker compose down
 ```
 
-Consulta [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) antes de un despliegue real.
+Consulta [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) antes de cualquier despliegue externo.
 
 ---
 
@@ -181,10 +191,18 @@ python manage.py runserver
 cd frontend
 npm install
 npm run typecheck
+npm run test
+npm run build
 npm run dev
 ```
 
-El CI ejecuta system checks, verificación de migraciones, migraciones, compilación Python, tests, typecheck TypeScript, build Vite y validación de Docker Compose.
+También puedes ejecutar el quality gate local completo:
+
+```bash
+npm run check
+```
+
+El CI ejecuta system checks de Django, verificación de migraciones, migraciones, compilación Python, tests backend, typecheck TypeScript, tests frontend, auditoría de dependencias npm de producción, build Vite y validación de Docker Compose.
 
 ---
 
@@ -287,10 +305,11 @@ La continuidad se documenta únicamente cuando existe una coincidencia verificab
 | 8 | Analítica, históricos y reportes |
 | 9 | Recomendaciones inteligentes |
 | 10 | Simulador IoT |
-| 11 | Hardening, CI y producción |
+| 11 | Hardening, CI y despliegue reproducible |
 | 12 | UI/UX final, documentación y `v1.0.0` |
+| 13 | Quality hardening: tests frontend, accesibilidad, auditoría y mantenimiento · `v1.1.0` |
 
-**EcoHome 1.0 está funcionalmente completo dentro del alcance definido para esta recuperación.**
+**EcoHome 1.1 está funcionalmente completo dentro del alcance definido como proyecto académico evolucionado y de portafolio.**
 
 ---
 
@@ -305,5 +324,5 @@ La continuidad se documenta únicamente cuando existe una coincidencia verificab
 ---
 
 <p align="center">
-  <strong>EcoHome v1.0.0 · Universidad APEC (UNAPEC) · Proyecto académico evolucionado a plataforma full-stack</strong>
+  <strong>EcoHome v1.1.0 · Universidad APEC (UNAPEC) · Proyecto académico evolucionado y proyecto de portafolio</strong>
 </p>
