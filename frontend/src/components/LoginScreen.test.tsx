@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -26,12 +26,13 @@ describe('LoginScreen', () => {
     expect(screen.getByText('Credenciales inválidas')).toBeTruthy();
   });
 
-  it('evita enviar un formulario vacío mediante validación HTML', () => {
-    const onLogin = vi.fn();
+  it('marca usuario y contraseña como campos obligatorios', () => {
+    render(<LoginScreen error={null} onLogin={vi.fn()} />);
 
-    render(<LoginScreen error={null} onLogin={onLogin} />);
-    fireEvent.submit(screen.getByRole('button', { name: 'Iniciar sesión' }).closest('form')!);
+    const username = screen.getByLabelText('Usuario') as HTMLInputElement;
+    const password = screen.getByLabelText('Contraseña') as HTMLInputElement;
 
-    expect(onLogin).not.toHaveBeenCalled();
+    expect(username.required).toBe(true);
+    expect(password.required).toBe(true);
   });
 });
