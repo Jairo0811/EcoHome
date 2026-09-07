@@ -93,7 +93,7 @@ Documentación ampliada: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ---
 
-## 🛠️ Stack tecnológico real
+## 🧱 Stack tecnológico
 
 ### ⚙️ Backend
 
@@ -296,7 +296,7 @@ El broker MQTT incluido en Compose permite conexiones anónimas para facilitar d
 | 👨🏻‍💻 Rafael Antonio De Leon Dominguez | A00113515 |
 | 👨🏻‍💻 Francis Jairo Matías Rosario | A00115261 |
 
-### 🧭 Continuidad académica
+## 🧭 Continuidad académica
 
 La continuidad se documenta únicamente cuando existe una coincidencia verificable por estudiante o profesor. Dentro de los proyectos actualmente documentados no se ha verificado una segunda coincidencia inequívoca de Andrés Beltré o Rafael Antonio De Leon Dominguez con Francis Jairo Matías Rosario, ni una segunda asignatura con **Ing. Eddy G. Alcantara Solano**.
 
