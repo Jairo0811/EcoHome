@@ -13,6 +13,12 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/Jairo0811/EcoHome/actions/workflows/ci.yml">
+    <img src="https://github.com/Jairo0811/EcoHome/actions/workflows/ci.yml/badge.svg" alt="CI">
+  </a>
+</p>
+
+<p align="center">
   <strong>Plataforma inteligente para monitoreo de recursos, automatización, IoT y seguridad del hogar.</strong>
 </p>
 
@@ -65,7 +71,7 @@ La configuración incluida prioriza una experiencia local reproducible. Antes de
 - 🔍 **Auditoría automática de dependencias npm de producción** integrada en GitHub Actions.
 - 🔄 **Actualización automática de dependencias con Dependabot** para pip, npm, GitHub Actions y Docker.
 - ⚙️ **Entorno CI estabilizado** con versiones compatibles de npm, Vitest y jsdom para mantener builds reproducibles con Vite 8.
-- ✅ **Validación completa de cada cambio**: backend Django, migraciones, pruebas Python, frontend React/TypeScript, auditoría de dependencias y configuración Docker Compose.
+- ✅ **Validación completa de cada cambio**: backend Django, migraciones, pruebas Python, frontend React/TypeScript, auditoría de dependencias npm de producción, build Vite y validación de Docker Compose.
 - 🧰 **Base preparada para pruebas manuales y regresión**, permitiendo concentrar la siguiente etapa del proyecto en detección y corrección de errores sin ampliar el alcance funcional.
 
 ---
