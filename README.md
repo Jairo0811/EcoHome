@@ -71,7 +71,7 @@ La configuración incluida prioriza una experiencia local reproducible. Antes de
 - 🔍 **Auditoría automática de dependencias npm de producción** integrada en GitHub Actions.
 - 🔄 **Actualización automática de dependencias con Dependabot** para pip, npm, GitHub Actions y Docker.
 - ⚙️ **Entorno CI estabilizado** con versiones compatibles de npm, Vitest y jsdom para mantener builds reproducibles con Vite 8.
-- ✅ **Validación completa de cada cambio**: backend Django, migraciones, pruebas Python, frontend React/TypeScript, auditoría de dependencias npm de producción, build Vite y validación de Docker Compose.
+- ✅ **Validación completa de cada cambio**: backend Django, migraciones, pruebas Python, frontend React/TypeScript, auditoría de dependencias y configuración Docker Compose.
 - 🧰 **Base preparada para pruebas manuales y regresión**, permitiendo concentrar la siguiente etapa del proyecto en detección y corrección de errores sin ampliar el alcance funcional.
 
 ---
