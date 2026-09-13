@@ -2,23 +2,51 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShieldHalved, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 import { useSecurity } from '../hooks/useSecurity';
+import type { SecurityMode } from '../types/security';
+
+const modeLabels: Record<SecurityMode, string> = {
+  DISARMED: 'Desarmado',
+  HOME: 'En casa',
+  AWAY: 'Fuera',
+};
 
 export function SecurityOverview() {
   const { states, events, error, setMode } = useSecurity();
   const state = states[0];
 
+  const modeButtonClass = (mode: SecurityMode) =>
+    state?.mode === mode ? 'primary-button' : 'secondary-button';
+
   return (
     <article className="panel devices-panel" id="seguridad">
       <div className="panel-heading">
         <div><p className="eyebrow">Seguridad inteligente</p><h3>Protección del hogar</h3></div>
-        <span className="period-chip">{state?.mode ?? 'SIN CONFIGURAR'}</span>
+        <span className="period-chip">{state ? modeLabels[state.mode] : 'SIN CONFIGURAR'}</span>
       </div>
 
       {state && (
         <div className="hero-actions security-actions">
-          <button className="secondary-button" onClick={() => void setMode(state.home, 'DISARMED')}>Desarmar</button>
-          <button className="secondary-button" onClick={() => void setMode(state.home, 'HOME')}>En casa</button>
-          <button className="primary-button" onClick={() => void setMode(state.home, 'AWAY')}>Fuera</button>
+          <button
+            className={modeButtonClass('DISARMED')}
+            aria-pressed={state.mode === 'DISARMED'}
+            onClick={() => void setMode(state.home, 'DISARMED')}
+          >
+            Desarmar
+          </button>
+          <button
+            className={modeButtonClass('HOME')}
+            aria-pressed={state.mode === 'HOME'}
+            onClick={() => void setMode(state.home, 'HOME')}
+          >
+            En casa
+          </button>
+          <button
+            className={modeButtonClass('AWAY')}
+            aria-pressed={state.mode === 'AWAY'}
+            onClick={() => void setMode(state.home, 'AWAY')}
+          >
+            Fuera
+          </button>
         </div>
       )}
 
