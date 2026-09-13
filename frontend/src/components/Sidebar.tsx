@@ -10,6 +10,8 @@ import {
   faTriangleExclamation,
 } from '@fortawesome/free-solid-svg-icons';
 
+import ecohomeIsotipo from '../assets/branding/ecohome-isotipo.png';
+
 const navigation = [
   { icon: faHouse, label: 'Inicio', target: 'inicio' },
   { icon: faMicrochip, label: 'Dispositivos', target: 'dispositivos' },
@@ -35,7 +37,7 @@ export function Sidebar() {
     <aside className="sidebar">
       <div className="brand">
         <div className="brand-mark" aria-hidden="true">
-          <img src="/favicon.png" alt="" className="brand-isotipo" />
+          <img src={ecohomeIsotipo} alt="" className="brand-isotipo" />
         </div>
         <div className="brand-copy">
           <div>
