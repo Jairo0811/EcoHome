@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFlask } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 
 import { api } from '../api/http';
@@ -33,17 +35,18 @@ export function SimulatorPanel({ hasHome }: Props) {
   }
 
   return (
-    <article className="panel">
-      <div className="panel-heading">
+    <article className="panel simulator-panel">
+      <div className="simulator-copy">
+        <div className="simulator-icon" aria-hidden="true"><FontAwesomeIcon icon={faFlask} /></div>
         <div>
           <p className="eyebrow">Laboratorio IoT</p>
           <h3>Simulador de telemetría</h3>
+          <p className="subtitle">{status}</p>
         </div>
-        <button className="primary-button" type="button" disabled={!hasHome} onClick={() => void run()}>
-          Simular 10 ciclos
-        </button>
       </div>
-      <p className="subtitle">{status}</p>
+      <button className="primary-button" type="button" disabled={!hasHome} onClick={() => void run()}>
+        Simular 10 ciclos
+      </button>
     </article>
   );
 }
