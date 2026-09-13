@@ -1,2 +1,98 @@
-import type {Alert,AutomationRule,Paginated} from '../types/automation';import type {AuthTokens,AuthUser} from '../types/auth';import type {DashboardSummary} from '../types/dashboard';import type {IotConfig,IotTopic} from '../types/iot';import type {Recommendation} from '../types/recommendations';import type {ReportOverview} from '../types/reports';import type {ResourceHistory,ResourceMetric,ResourceSummary} from '../types/resources';import type {SecurityEvent,SecurityMode,SecurityState} from '../types/security';const API_BASE_URL=import.meta.env.VITE_API_BASE_URL??'/api/v1',A='ecohome.access',R='ecohome.refresh';export const tokenStore={getAccess:()=>localStorage.getItem(A),getRefresh:()=>localStorage.getItem(R),set(t:AuthTokens){localStorage.setItem(A,t.access);localStorage.setItem(R,t.refresh)},clear(){localStorage.removeItem(A);localStorage.removeItem(R)}};async function request<T>(p:string,i:RequestInit={},auth=true):Promise<T>{const h=new Headers(i.headers);h.set('Accept','application/json');if(i.body)h.set('Content-Type','application/json');if(auth){const x=tokenStore.getAccess();if(x)h.set('Authorization',`Bearer ${x}`)}const r=await fetch(`${API_BASE_URL}${p}`,{...i,headers:h});if(!r.ok)throw new Error(`EcoHome API respondió con estado ${r.status}`);if(r.status===204)return undefined as T;return r.json() as Promise<T>}
-export const api={login:(u:string,p:string)=>request<AuthTokens>('/auth/token/',{method:'POST',body:JSON.stringify({username:u,password:p})},false),register:(p:{username:string;email:string;password:string})=>request<AuthUser>('/auth/register/',{method:'POST',body:JSON.stringify(p)},false),getMe:()=>request<AuthUser>('/auth/me/'),getDashboardSummary:()=>request<DashboardSummary>('/dashboard/summary/'),getIotConfig:()=>request<IotConfig>('/iot/config/'),getIotTopics:()=>request<IotTopic[]>('/iot/topics/'),ingest:(id:string,p:unknown)=>request(`/iot/ingest/${encodeURIComponent(id)}/`,{method:'POST',body:JSON.stringify(p)}),sendDeviceCommand:(id:number,p:unknown)=>request(`/iot/devices/${id}/command/`,{method:'POST',body:JSON.stringify(p)}),getResourceSummary:(r:'day'|'week'|'month'='day')=>request<ResourceSummary>(`/resources/summary/?range=${r}`),getResourceHistory:(m:ResourceMetric,d=30)=>request<ResourceHistory>(`/resources/history/?metric=${m}&days=${d}`),getAlerts:()=>request<Paginated<Alert>>('/automation/alerts/?status=OPEN'),resolveAlert:(id:number)=>request<Alert>(`/automation/alerts/${id}/resolve/`,{method:'POST'}),getAutomationRules:()=>request<Paginated<AutomationRule>>('/automation/rules/'),executeAutomation:(id:number)=>request(`/automation/rules/${id}/execute/`,{method:'POST'}),getSecurityStates:()=>request<SecurityState[]>('/security/states/'),setSecurityMode:(h:number,m:SecurityMode)=>request<SecurityState>(`/security/states/${h}/`,{method:'PATCH',body:JSON.stringify({mode:m})}),getSecurityEvents:()=>request<Paginated<SecurityEvent>>('/security/events/'),getReportOverview:(d=30)=>request<ReportOverview>(`/reports/overview/?days=${d}`),getRecommendations:()=>request<Paginated<Recommendation>>('/recommendations/'),refreshRecommendations:()=>request<Recommendation[]>('/recommendations/refresh/',{method:'POST'}),dismissRecommendation:(id:number)=>request<Recommendation>(`/recommendations/${id}/dismiss/`,{method:'POST'}),applyRecommendation:(id:number)=>request<Recommendation>(`/recommendations/${id}/apply/`,{method:'POST'}),runSimulation:(steps=10)=>request<{home:number;steps:number;telemetryCreated:number;telemetryIds:number[]}>('/simulator/run/',{method:'POST',body:JSON.stringify({steps})})};
+import type { Alert, AutomationRule, Paginated } from '../types/automation';
+import type { AuthTokens, AuthUser } from '../types/auth';
+import type { DashboardSummary } from '../types/dashboard';
+import type { IotConfig, IotTopic } from '../types/iot';
+import type { Recommendation } from '../types/recommendations';
+import type { ReportOverview } from '../types/reports';
+import type { ResourceHistory, ResourceMetric, ResourceSummary } from '../types/resources';
+import type { SecurityEvent, SecurityMode, SecurityState } from '../types/security';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '/api/v1';
+const ACCESS_KEY = 'ecohome.access';
+const REFRESH_KEY = 'ecohome.refresh';
+
+export const tokenStore = {
+  getAccess: () => localStorage.getItem(ACCESS_KEY),
+  getRefresh: () => localStorage.getItem(REFRESH_KEY),
+  set(tokens: AuthTokens) {
+    localStorage.setItem(ACCESS_KEY, tokens.access);
+    localStorage.setItem(REFRESH_KEY, tokens.refresh);
+  },
+  clear() {
+    localStorage.removeItem(ACCESS_KEY);
+    localStorage.removeItem(REFRESH_KEY);
+  },
+};
+
+async function request<T>(path: string, init: RequestInit = {}, auth = true): Promise<T> {
+  const headers = new Headers(init.headers);
+  headers.set('Accept', 'application/json');
+  if (init.body) headers.set('Content-Type', 'application/json');
+
+  if (auth) {
+    const access = tokenStore.getAccess();
+    if (access) headers.set('Authorization', `Bearer ${access}`);
+  }
+
+  const response = await fetch(`${API_BASE_URL}${path}`, { ...init, headers });
+
+  if (!response.ok) {
+    if (path === '/auth/token/' && response.status === 401) {
+      throw new Error('Usuario o contraseña incorrectos.');
+    }
+    throw new Error(`EcoHome API respondió con estado ${response.status}`);
+  }
+
+  if (response.status === 204) return undefined as T;
+  return response.json() as Promise<T>;
+}
+
+export const api = {
+  login: (username: string, password: string) =>
+    request<AuthTokens>(
+      '/auth/token/',
+      { method: 'POST', body: JSON.stringify({ username, password }) },
+      false,
+    ),
+  register: (payload: { username: string; email: string; password: string }) =>
+    request<AuthUser>('/auth/register/', { method: 'POST', body: JSON.stringify(payload) }, false),
+  getMe: () => request<AuthUser>('/auth/me/'),
+  getDashboardSummary: () => request<DashboardSummary>('/dashboard/summary/'),
+  getIotConfig: () => request<IotConfig>('/iot/config/'),
+  getIotTopics: () => request<IotTopic[]>('/iot/topics/'),
+  ingest: (externalId: string, payload: unknown) =>
+    request(`/iot/ingest/${encodeURIComponent(externalId)}/`, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+  sendDeviceCommand: (id: number, payload: unknown) =>
+    request(`/iot/devices/${id}/command/`, { method: 'POST', body: JSON.stringify(payload) }),
+  getResourceSummary: (range: 'day' | 'week' | 'month' = 'day') =>
+    request<ResourceSummary>(`/resources/summary/?range=${range}`),
+  getResourceHistory: (metric: ResourceMetric, days = 30) =>
+    request<ResourceHistory>(`/resources/history/?metric=${metric}&days=${days}`),
+  getAlerts: () => request<Paginated<Alert>>('/automation/alerts/?status=OPEN'),
+  resolveAlert: (id: number) => request<Alert>(`/automation/alerts/${id}/resolve/`, { method: 'POST' }),
+  getAutomationRules: () => request<Paginated<AutomationRule>>('/automation/rules/'),
+  executeAutomation: (id: number) => request(`/automation/rules/${id}/execute/`, { method: 'POST' }),
+  getSecurityStates: () => request<SecurityState[]>('/security/states/'),
+  setSecurityMode: (home: number, mode: SecurityMode) =>
+    request<SecurityState>(`/security/states/${home}/`, {
+      method: 'PATCH',
+      body: JSON.stringify({ mode }),
+    }),
+  getSecurityEvents: () => request<Paginated<SecurityEvent>>('/security/events/'),
+  getReportOverview: (days = 30) => request<ReportOverview>(`/reports/overview/?days=${days}`),
+  getRecommendations: () => request<Paginated<Recommendation>>('/recommendations/'),
+  refreshRecommendations: () =>
+    request<Recommendation[]>('/recommendations/refresh/', { method: 'POST' }),
+  dismissRecommendation: (id: number) =>
+    request<Recommendation>(`/recommendations/${id}/dismiss/`, { method: 'POST' }),
+  applyRecommendation: (id: number) =>
+    request<Recommendation>(`/recommendations/${id}/apply/`, { method: 'POST' }),
+  runSimulation: (steps = 10) =>
+    request<{ home: number; steps: number; telemetryCreated: number; telemetryIds: number[] }>(
+      '/simulator/run/',
+      { method: 'POST', body: JSON.stringify({ steps }) },
+    ),
+};
