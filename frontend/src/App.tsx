@@ -55,7 +55,7 @@ function DashboardApp({ user, onLogout }: { user: AuthUser; onLogout: () => void
           <StatCard label="Agua · 24 h" value={`${dashboard.consumption24h.waterLiters.toFixed(0)} L`} detail="consumo" icon="◌" accent="blue" />
         </section>
 
-        <section className="content-grid"><SimulatorPanel /></section>
+        <section className="content-grid"><SimulatorPanel hasHome={dashboard.homes > 0} /></section>
         <section className="content-grid"><RecommendationsOverview /></section>
         <section className="content-grid"><AdvancedAnalytics /></section>
         <section className="content-grid"><SecurityOverview /><ResourceOverview /></section>
