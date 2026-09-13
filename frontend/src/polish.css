@@ -13,6 +13,30 @@
   padding-bottom: 24px;
 }
 
+.brand-mark {
+  overflow: hidden;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.brand-isotipo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 7px 14px rgba(70, 219, 117, 0.24));
+}
+
+.auth-brand-logo {
+  display: block;
+  width: min(100%, 285px);
+  max-height: 145px;
+  margin: 0 auto 18px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 28px rgba(22, 158, 78, 0.16));
+}
+
 .main-content {
   width: min(100%, 1460px);
   padding: 24px 28px 44px;
@@ -357,6 +381,10 @@
 
   .stats-grid-five .stat-card {
     min-height: 96px;
+  }
+
+  .auth-brand-logo {
+    width: min(100%, 235px);
   }
 
   .topbar-actions .logout-button span {
