@@ -38,7 +38,7 @@ describe('SecurityOverview', () => {
     const activeButton = screen.getByRole('button', { name: buttonName });
     expect(activeButton.getAttribute('aria-pressed')).toBe('true');
     expect(activeButton.className).toContain('primary-button');
-    expect(screen.getByText(label)).toBeTruthy();
+    expect(screen.getByText(label, { selector: '.period-chip' })).toBeTruthy();
   });
 
   it('sends the selected security mode to the API hook', () => {
