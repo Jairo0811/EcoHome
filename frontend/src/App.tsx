@@ -1,8 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBolt,
+  faCalendarDays,
   faCircleCheck,
+  faCircleExclamation,
   faDroplet,
+  faFireFlameSimple,
   faHouse,
   faLeaf,
   faMicrochip,
@@ -37,6 +40,20 @@ function DashboardApp({ user, onLogout }: { user: AuthUser; onLogout: () => void
     ? Math.round((dashboard.devices.online / dashboard.devices.total) * 100)
     : 0;
   const displayName = user.first_name || user.username;
+  const allOnline = dashboard.devices.total > 0 && dashboard.devices.online === dashboard.devices.total;
+  const statusTitle = dashboard.devices.total === 0
+    ? 'Sin dispositivos'
+    : allOnline
+      ? 'Todo en orden'
+      : 'Revisa tus dispositivos';
+  const statusDetail = dashboard.devices.total === 0
+    ? 'Añade dispositivos para comenzar el monitoreo'
+    : `${dashboard.devices.online} de ${dashboard.devices.total} dispositivos en línea`;
+  const today = new Intl.DateTimeFormat('es-DO', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+  }).format(new Date());
 
   return (
     <div className="app-shell">
@@ -50,6 +67,10 @@ function DashboardApp({ user, onLogout }: { user: AuthUser; onLogout: () => void
           </div>
 
           <div className="topbar-actions">
+            <div className="date-chip" aria-label={`Fecha: ${today}`}>
+              <FontAwesomeIcon icon={faCalendarDays} />
+              <span>{today}</span>
+            </div>
             <div className="user-summary" aria-label={`Sesión de ${displayName}`}>
               <div className="avatar" aria-hidden="true">{displayName.slice(0, 1).toUpperCase()}</div>
               <div>
@@ -72,29 +93,27 @@ function DashboardApp({ user, onLogout }: { user: AuthUser; onLogout: () => void
             <h2>Tecnología para un hogar <span>más consciente.</span></h2>
             <p>Controla tus dispositivos, monitorea recursos y automatiza tareas desde un mismo lugar.</p>
           </div>
-          <div className="hero-status">
-            <div className="hero-status-icon"><FontAwesomeIcon icon={faCircleCheck} /></div>
+          <div className={`hero-status ${allOnline ? 'hero-status-ok' : 'hero-status-attention'}`}>
+            <div className="hero-status-icon">
+              <FontAwesomeIcon icon={allOnline ? faCircleCheck : faCircleExclamation} />
+            </div>
             <div>
-              <strong>Todo en orden</strong>
-              <span>{dashboard.devices.online} de {dashboard.devices.total} dispositivos en línea</span>
+              <strong>{statusTitle}</strong>
+              <span>{statusDetail}</span>
             </div>
           </div>
         </section>
 
-        <section className="stats-grid" aria-label="Indicadores principales">
+        <section className="stats-grid stats-grid-five" aria-label="Indicadores principales">
           <StatCard label="Hogares" value={String(dashboard.homes)} detail="registrados" icon={faHouse} accent="green" />
           <StatCard label="Dispositivos" value={`${dashboard.devices.online}/${dashboard.devices.total}`} detail={`${connectedPercent}% conectados`} icon={faMicrochip} accent="blue" />
           <StatCard label="Energía · 24 h" value={`${dashboard.consumption24h.energyKwh.toFixed(1)} kWh`} detail="consumo" icon={faBolt} accent="orange" />
           <StatCard label="Agua · 24 h" value={`${dashboard.consumption24h.waterLiters.toFixed(0)} L`} detail="consumo" icon={faDroplet} accent="cyan" />
+          <StatCard label="Gas · 24 h" value={`${dashboard.consumption24h.gasM3.toFixed(2)} m³`} detail="consumo" icon={faFireFlameSimple} accent="orange" />
         </section>
 
-        <section className="content-grid dashboard-primary"><SimulatorPanel hasHome={dashboard.homes > 0} /></section>
-        <section className="content-grid"><RecommendationsOverview /></section>
-        <section className="content-grid"><AdvancedAnalytics /></section>
-        <section className="content-grid"><SecurityOverview /><ResourceOverview /></section>
-
-        <section className="content-grid" id="dispositivos">
-          <article className="panel devices-panel">
+        <section className="content-grid dashboard-overview">
+          <article className="panel devices-panel" id="dispositivos">
             <div className="panel-heading">
               <div><p className="eyebrow">IoT</p><h3>Dispositivos recientes</h3></div>
               <span className="device-count">{dashboard.recentDevices.length}</span>
@@ -116,9 +135,13 @@ function DashboardApp({ user, onLogout }: { user: AuthUser; onLogout: () => void
               </div>
             ))}
           </article>
+          <ResourceOverview />
         </section>
 
+        <section className="content-grid"><SecurityOverview /><AdvancedAnalytics /></section>
+        <section className="content-grid"><RecommendationsOverview /></section>
         <section className="content-grid"><OperationsOverview /></section>
+        <section className="content-grid dashboard-secondary"><SimulatorPanel hasHome={dashboard.homes > 0} /></section>
       </main>
     </div>
   );
