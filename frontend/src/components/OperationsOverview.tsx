@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleCheck, faRotate, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck, faGear, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 import { useOperations } from '../hooks/useOperations';
 
@@ -46,7 +46,7 @@ export function OperationsOverview() {
 
         {rules.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-icon"><FontAwesomeIcon icon={faRotate} /></div>
+            <div className="empty-icon"><FontAwesomeIcon icon={faGear} /></div>
             <strong>Sin reglas todavía</strong>
             <p>Las automatizaciones configuradas aparecerán aquí.</p>
           </div>
@@ -54,7 +54,7 @@ export function OperationsOverview() {
           <div className="device-list">
             {rules.slice(0, 5).map((rule) => (
               <div className="device-row" key={rule.id}>
-                <div className="device-icon"><FontAwesomeIcon icon={faRotate} /></div>
+                <div className="device-icon"><FontAwesomeIcon icon={faGear} /></div>
                 <div className="device-copy">
                   <strong>{rule.name}</strong>
                   <span>{rule.trigger_type} → {rule.action_type}</span>
