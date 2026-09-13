@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/EcoHome-logo.jpeg" alt="Logo de EcoHome" width="720" />
+  <img src="docs/images/EcoHome-logo.png" alt="Logo de EcoHome" width="720" />
 </p>
 
 <p align="center">
