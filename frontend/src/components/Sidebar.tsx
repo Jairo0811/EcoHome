@@ -1,16 +1,26 @@
+import { useState } from 'react';
+
 const navigation = [
-  ['⌂', 'Inicio'],
-  ['⌁', 'Mi hogar'],
-  ['▦', 'Habitaciones'],
-  ['◉', 'Dispositivos'],
-  ['↯', 'Consumo'],
-  ['◇', 'Seguridad'],
-  ['⚙', 'Automatizaciones'],
-  ['!', 'Alertas'],
-  ['▤', 'Reportes'],
-];
+  { icon: '⌂', label: 'Inicio', target: 'inicio' },
+  { icon: '◉', label: 'Dispositivos', target: 'dispositivos' },
+  { icon: '↯', label: 'Consumo', target: 'consumo' },
+  { icon: '◇', label: 'Seguridad', target: 'seguridad' },
+  { icon: '⚙', label: 'Automatizaciones', target: 'automatizaciones' },
+  { icon: '!', label: 'Alertas', target: 'alertas' },
+  { icon: '▤', label: 'Reportes', target: 'reportes' },
+] as const;
 
 export function Sidebar() {
+  const [activeTarget, setActiveTarget] = useState('inicio');
+
+  function navigateTo(target: string) {
+    const destination = document.getElementById(target);
+    if (!destination) return;
+
+    setActiveTarget(target);
+    destination.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   return (
     <aside className="sidebar">
       <div className="brand">
@@ -22,17 +32,26 @@ export function Sidebar() {
       </div>
 
       <nav className="navigation" aria-label="Navegación principal">
-        {navigation.map(([icon, label], index) => (
-          <button className={`nav-item ${index === 0 ? 'active' : ''}`} key={label} type="button">
-            <span className="nav-icon" aria-hidden="true">{icon}</span>
-            <span>{label}</span>
-          </button>
-        ))}
+        {navigation.map(({ icon, label, target }) => {
+          const active = activeTarget === target;
+          return (
+            <button
+              className={`nav-item ${active ? 'active' : ''}`}
+              key={target}
+              type="button"
+              onClick={() => navigateTo(target)}
+              aria-current={active ? 'page' : undefined}
+            >
+              <span className="nav-icon" aria-hidden="true">{icon}</span>
+              <span>{label}</span>
+            </button>
+          );
+        })}
       </nav>
 
       <div className="sidebar-footer">
         <span className="status-dot" />
-        <span>EcoHome 0.1.0</span>
+        <span>EcoHome 1.1.0</span>
       </div>
     </aside>
   );
