@@ -1,2 +1,77 @@
-import {useSecurity} from '../hooks/useSecurity';
-export function SecurityOverview(){const {states,events,error,setMode}=useSecurity();const state=states[0];return <article className="panel devices-panel"><div className="panel-heading"><div><p className="eyebrow">Seguridad inteligente</p><h3>Protección del hogar</h3></div><span className="period-chip">{state?.mode??'SIN CONFIGURAR'}</span></div>{state&&<div className="hero-actions"><button className="secondary-button" onClick={()=>void setMode(state.home,'DISARMED')}>Desarmar</button><button className="secondary-button" onClick={()=>void setMode(state.home,'HOME')}>En casa</button><button className="primary-button" onClick={()=>void setMode(state.home,'AWAY')}>Fuera</button></div>}{error&&<p className="subtitle">{error}</p>}<div className="device-list">{events.slice(0,5).map(e=><div className="device-row" key={e.id}><div className="device-icon">{e.severity==='CRITICAL'?'!':'⌁'}</div><div className="device-copy"><strong>{e.event_type}</strong><span>{e.device_name??'Sistema'} · {e.message||new Date(e.occurred_at).toLocaleString('es-DO')}</span></div></div>)}{events.length===0&&<div className="empty-state"><strong>Sin incidentes recientes</strong><p>Los eventos de cámaras y sensores aparecerán aquí.</p></div>}</div></article>}
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShieldHalved, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+
+import { useSecurity } from '../hooks/useSecurity';
+import type { SecurityMode } from '../types/security';
+
+const modeLabels: Record<SecurityMode, string> = {
+  DISARMED: 'Desarmado',
+  HOME: 'En casa',
+  AWAY: 'Fuera',
+};
+
+export function SecurityOverview() {
+  const { states, events, error, setMode } = useSecurity();
+  const state = states[0];
+
+  const modeButtonClass = (mode: SecurityMode) =>
+    state?.mode === mode ? 'primary-button' : 'secondary-button';
+
+  return (
+    <article className="panel devices-panel" id="seguridad">
+      <div className="panel-heading">
+        <div><p className="eyebrow">Seguridad inteligente</p><h3>Protección del hogar</h3></div>
+        <span className="period-chip">{state ? modeLabels[state.mode] : 'SIN CONFIGURAR'}</span>
+      </div>
+
+      {state && (
+        <div className="hero-actions security-actions">
+          <button
+            className={modeButtonClass('DISARMED')}
+            aria-pressed={state.mode === 'DISARMED'}
+            onClick={() => void setMode(state.home, 'DISARMED')}
+          >
+            Desarmar
+          </button>
+          <button
+            className={modeButtonClass('HOME')}
+            aria-pressed={state.mode === 'HOME'}
+            onClick={() => void setMode(state.home, 'HOME')}
+          >
+            En casa
+          </button>
+          <button
+            className={modeButtonClass('AWAY')}
+            aria-pressed={state.mode === 'AWAY'}
+            onClick={() => void setMode(state.home, 'AWAY')}
+          >
+            Fuera
+          </button>
+        </div>
+      )}
+
+      {error && <p className="subtitle">{error}</p>}
+
+      <div className="device-list">
+        {events.slice(0, 5).map((event) => (
+          <div className="device-row" key={event.id}>
+            <div className="device-icon">
+              <FontAwesomeIcon icon={event.severity === 'CRITICAL' ? faTriangleExclamation : faShieldHalved} />
+            </div>
+            <div className="device-copy">
+              <strong>{event.event_type}</strong>
+              <span>{event.device_name ?? 'Sistema'} · {event.message || new Date(event.occurred_at).toLocaleString('es-DO')}</span>
+            </div>
+          </div>
+        ))}
+        {events.length === 0 && (
+          <div className="empty-state">
+            <div className="empty-icon"><FontAwesomeIcon icon={faShieldHalved} /></div>
+            <strong>Sin incidentes recientes</strong>
+            <p>Los eventos de cámaras y sensores aparecerán aquí.</p>
+          </div>
+        )}
+      </div>
+    </article>
+  );
+}

@@ -5,6 +5,7 @@ import App from './App';
 import './index.css';
 import './auth.css';
 import './v1.css';
+import './polish.css';
 
 const root = document.getElementById('root');
 

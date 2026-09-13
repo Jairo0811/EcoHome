@@ -1,15 +1,11 @@
-import type { DeviceStatus as DeviceStatusValue } from '../types/dashboard';
+type Props = { status: 'ONLINE' | 'OFFLINE' | 'WARNING' };
 
-interface DeviceStatusProps {
-  status: DeviceStatusValue;
-}
-
-const labels: Record<DeviceStatusValue, string> = {
+const labels = {
   ONLINE: 'En línea',
   OFFLINE: 'Fuera de línea',
   WARNING: 'Advertencia',
-};
+} as const;
 
-export function DeviceStatus({ status }: DeviceStatusProps) {
+export function DeviceStatus({ status }: Props) {
   return <span className={`device-status status-${status.toLowerCase()}`}>{labels[status]}</span>;
 }

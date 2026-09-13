@@ -57,6 +57,7 @@ La configuración incluida prioriza una experiencia local reproducible. Antes de
 - 📊 Dashboard, KPIs, tendencias y exportación CSV.
 - ✨ Recomendaciones inteligentes basadas en consumo, conectividad y seguridad.
 - 🧪 Simulador IoT reproducible para probar el sistema sin hardware físico.
+- 🎨 Interfaz responsive rediseñada con identidad visual EcoHome y Font Awesome.
 - 🐳 Entorno completo con Docker Compose, PostgreSQL, Mosquitto, Gunicorn y Nginx.
 - ✅ CI para Django, React/TypeScript, pruebas frontend, auditoría npm y validación de infraestructura.
 - ♿ Mejoras de semántica accesible en autenticación.
@@ -71,6 +72,7 @@ La configuración incluida prioriza una experiencia local reproducible. Antes de
 - 🔍 **Auditoría automática de dependencias npm de producción** integrada en GitHub Actions.
 - 🔄 **Actualización automática de dependencias con Dependabot** para pip, npm, GitHub Actions y Docker.
 - ⚙️ **Entorno CI estabilizado** con versiones compatibles de npm, Vitest y jsdom para mantener builds reproducibles con Vite 8.
+- 🎨 **Rediseño visual final** con dashboard responsive, navegación interna funcional, nueva identidad EcoHome e iconografía Font Awesome.
 - ✅ **Validación completa de cada cambio**: backend Django, migraciones, pruebas Python, frontend React/TypeScript, auditoría de dependencias y configuración Docker Compose.
 - 🧰 **Base preparada para pruebas manuales y regresión**, permitiendo concentrar la siguiente etapa del proyecto en detección y corrección de errores sin ampliar el alcance funcional.
 
@@ -123,6 +125,7 @@ Documentación ampliada: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 - React 19
 - TypeScript 7
 - Vite 8
+- Font Awesome
 - Vitest
 - Testing Library
 - Nginx para producción/demo contenedorizada
