@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShieldHalved, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+
 import { useSecurity } from '../hooks/useSecurity';
 
 export function SecurityOverview() {
@@ -12,7 +15,7 @@ export function SecurityOverview() {
       </div>
 
       {state && (
-        <div className="hero-actions">
+        <div className="hero-actions security-actions">
           <button className="secondary-button" onClick={() => void setMode(state.home, 'DISARMED')}>Desarmar</button>
           <button className="secondary-button" onClick={() => void setMode(state.home, 'HOME')}>En casa</button>
           <button className="primary-button" onClick={() => void setMode(state.home, 'AWAY')}>Fuera</button>
@@ -24,7 +27,9 @@ export function SecurityOverview() {
       <div className="device-list">
         {events.slice(0, 5).map((event) => (
           <div className="device-row" key={event.id}>
-            <div className="device-icon">{event.severity === 'CRITICAL' ? '!' : '⌁'}</div>
+            <div className="device-icon">
+              <FontAwesomeIcon icon={event.severity === 'CRITICAL' ? faTriangleExclamation : faShieldHalved} />
+            </div>
             <div className="device-copy">
               <strong>{event.event_type}</strong>
               <span>{event.device_name ?? 'Sistema'} · {event.message || new Date(event.occurred_at).toLocaleString('es-DO')}</span>
@@ -33,6 +38,7 @@ export function SecurityOverview() {
         ))}
         {events.length === 0 && (
           <div className="empty-state">
+            <div className="empty-icon"><FontAwesomeIcon icon={faShieldHalved} /></div>
             <strong>Sin incidentes recientes</strong>
             <p>Los eventos de cámaras y sensores aparecerán aquí.</p>
           </div>
