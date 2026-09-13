@@ -1,13 +1,24 @@
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBolt,
+  faChartLine,
+  faGear,
+  faHouse,
+  faLeaf,
+  faMicrochip,
+  faShieldHalved,
+  faTriangleExclamation,
+} from '@fortawesome/free-solid-svg-icons';
 
 const navigation = [
-  { icon: '⌂', label: 'Inicio', target: 'inicio' },
-  { icon: '◉', label: 'Dispositivos', target: 'dispositivos' },
-  { icon: '↯', label: 'Consumo', target: 'consumo' },
-  { icon: '◇', label: 'Seguridad', target: 'seguridad' },
-  { icon: '⚙', label: 'Automatizaciones', target: 'automatizaciones' },
-  { icon: '!', label: 'Alertas', target: 'alertas' },
-  { icon: '▤', label: 'Reportes', target: 'reportes' },
+  { icon: faHouse, label: 'Inicio', target: 'inicio' },
+  { icon: faMicrochip, label: 'Dispositivos', target: 'dispositivos' },
+  { icon: faBolt, label: 'Consumo', target: 'consumo' },
+  { icon: faShieldHalved, label: 'Seguridad', target: 'seguridad' },
+  { icon: faGear, label: 'Automatizaciones', target: 'automatizaciones' },
+  { icon: faTriangleExclamation, label: 'Alertas', target: 'alertas' },
+  { icon: faChartLine, label: 'Reportes', target: 'reportes' },
 ] as const;
 
 export function Sidebar() {
@@ -24,10 +35,15 @@ export function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="brand">
-        <div className="brand-mark" aria-hidden="true">⌂</div>
-        <div>
-          <span className="brand-eco">Eco</span>
-          <span className="brand-home">Home</span>
+        <div className="brand-mark" aria-hidden="true">
+          <FontAwesomeIcon icon={faLeaf} />
+        </div>
+        <div className="brand-copy">
+          <div>
+            <span className="brand-eco">Eco</span>
+            <span className="brand-home">Home</span>
+          </div>
+          <small>Smart Living</small>
         </div>
       </div>
 
@@ -41,8 +57,11 @@ export function Sidebar() {
               type="button"
               onClick={() => navigateTo(target)}
               aria-current={active ? 'page' : undefined}
+              title={label}
             >
-              <span className="nav-icon" aria-hidden="true">{icon}</span>
+              <span className="nav-icon" aria-hidden="true">
+                <FontAwesomeIcon icon={icon} />
+              </span>
               <span>{label}</span>
             </button>
           );
