@@ -1,4 +1,6 @@
 import { FormEvent, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLeaf } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
   error: string | null;
@@ -23,7 +25,7 @@ export function LoginScreen({ error, onLogin }: Props) {
   return (
     <main className="auth-shell">
       <section className="auth-card" aria-labelledby="login-title">
-        <div className="auth-mark" aria-hidden="true">⌂</div>
+        <div className="auth-mark" aria-hidden="true"><FontAwesomeIcon icon={faLeaf} /></div>
         <p className="eyebrow">EcoHome</p>
         <h1 id="login-title">Control inteligente para tu hogar</h1>
         <p className="subtitle">Inicia sesión para administrar hogares, dispositivos y consumo.</p>
