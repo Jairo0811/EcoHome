@@ -7,7 +7,7 @@ export function RecommendationsOverview() {
   const { items, dismiss, apply } = useRecommendations();
 
   return (
-    <article className="panel devices-panel">
+    <article className="panel devices-panel recommendations-panel">
       <div className="panel-heading">
         <div><p className="eyebrow">EcoHome Insights</p><h3>Recomendaciones inteligentes</h3></div>
         <span className="device-count">{items.length}</span>
@@ -32,7 +32,7 @@ export function RecommendationsOverview() {
               </div>
               <div className="hero-actions">
                 <button className="secondary-button" onClick={() => void dismiss(item.id)}>Descartar</button>
-                <button className="primary-button" onClick={() => void apply(item.id)}>Aplicada</button>
+                <button className="primary-button" onClick={() => void apply(item.id)}>Aplicar</button>
               </div>
             </div>
           ))}
