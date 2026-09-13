@@ -40,7 +40,17 @@ async function request<T>(path: string, init: RequestInit = {}, auth = true): Pr
     if (path === '/auth/token/' && response.status === 401) {
       throw new Error('Usuario o contraseña incorrectos.');
     }
-    throw new Error(`EcoHome API respondió con estado ${response.status}`);
+
+    let message = `EcoHome API respondió con estado ${response.status}`;
+    try {
+      const payload = await response.clone().json() as { detail?: unknown };
+      if (typeof payload.detail === 'string' && payload.detail.trim()) {
+        message = payload.detail;
+      }
+    } catch {
+      // Mantener el mensaje genérico si la respuesta no contiene JSON utilizable.
+    }
+    throw new Error(message);
   }
 
   if (response.status === 204) return undefined as T;
