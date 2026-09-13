@@ -1,10 +1,14 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBolt, faDroplet, faFireFlameSimple } from '@fortawesome/free-solid-svg-icons';
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+
 import { useResources } from '../hooks/useResources';
 import type { ResourceMetric } from '../types/resources';
 
-const resources: Array<{ metric: ResourceMetric; label: string; unit: string; symbol: string }> = [
-  { metric: 'ENERGY_KWH', label: 'Energía', unit: 'kWh', symbol: '⚡' },
-  { metric: 'WATER_L', label: 'Agua', unit: 'L', symbol: '◌' },
-  { metric: 'GAS_M3', label: 'Gas', unit: 'm³', symbol: '◈' },
+const resources: Array<{ metric: ResourceMetric; label: string; unit: string; icon: IconDefinition }> = [
+  { metric: 'ENERGY_KWH', label: 'Energía', unit: 'kWh', icon: faBolt },
+  { metric: 'WATER_L', label: 'Agua', unit: 'L', icon: faDroplet },
+  { metric: 'GAS_M3', label: 'Gas', unit: 'm³', icon: faFireFlameSimple },
 ];
 
 export function ResourceOverview() {
@@ -13,14 +17,14 @@ export function ResourceOverview() {
   return (
     <article className="panel consumption-panel" id="consumo">
       <div className="panel-heading">
-        <div><p className="eyebrow">Eficiencia</p><h3>Límites de consumo diario</h3></div>
+        <div><p className="eyebrow">Eficiencia</p><h3>Consumo y límites diarios</h3></div>
         <span className="period-chip">Hoy</span>
       </div>
 
       {error && <p className="subtitle">{error}</p>}
 
       <div className="resource-list">
-        {resources.map(({ metric, label, unit, symbol }) => {
+        {resources.map(({ metric, label, unit, icon }) => {
           const item = data?.resources[metric];
           const progress = Math.min(item?.progressPercent ?? 0, 100);
 
@@ -28,7 +32,9 @@ export function ResourceOverview() {
             <div key={metric}>
               <div className="resource-row">
                 <div className="resource-label">
-                  <span className="resource-symbol">{symbol}</span>
+                  <span className={`resource-symbol resource-${metric.toLowerCase()}`}>
+                    <FontAwesomeIcon icon={icon} />
+                  </span>
                   <span>{label}</span>
                 </div>
                 <strong>
