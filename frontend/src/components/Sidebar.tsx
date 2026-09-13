@@ -5,7 +5,6 @@ import {
   faChartLine,
   faGear,
   faHouse,
-  faLeaf,
   faMicrochip,
   faShieldHalved,
   faTriangleExclamation,
@@ -36,7 +35,7 @@ export function Sidebar() {
     <aside className="sidebar">
       <div className="brand">
         <div className="brand-mark" aria-hidden="true">
-          <FontAwesomeIcon icon={faLeaf} />
+          <img src="/favicon.png" alt="" className="brand-isotipo" />
         </div>
         <div className="brand-copy">
           <div>
