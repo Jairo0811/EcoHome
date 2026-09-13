@@ -49,11 +49,12 @@ function DashboardApp({ user, onLogout }: { user: AuthUser; onLogout: () => void
   const statusDetail = dashboard.devices.total === 0
     ? 'Añade dispositivos para comenzar el monitoreo'
     : `${dashboard.devices.online} de ${dashboard.devices.total} dispositivos en línea`;
-  const today = new Intl.DateTimeFormat('es-DO', {
+  const rawToday = new Intl.DateTimeFormat('es-DO', {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
   }).format(new Date());
+  const today = rawToday.charAt(0).toUpperCase() + rawToday.slice(1);
 
   return (
     <div className="app-shell">
