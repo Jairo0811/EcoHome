@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults: {run: {working-directory: backend}}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with: {python-version: '3.13', cache: pip, cache-dependency-path: backend/requirements.txt}
       - run: python -m pip install --upgrade pip && pip install -r requirements.txt
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults: {run: {working-directory: frontend}}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
         with: {node-version: '22', package-manager-cache: false}
       - name: Use stable npm
@@ -54,5 +54,5 @@ jobs:
     name: Deployment · Compose validation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - run: docker compose config --quiet
